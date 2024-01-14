@@ -1,5 +1,6 @@
 # pegb_project
 Technical assessment test of PegB Python Developer
+
 author: Do Duy Manh
 
 INSTRUCTION TO RUN BACKEND IN LOCAL
@@ -34,12 +35,12 @@ II. Setup
 7. After the request "init-data" respond success, the rest requests are able to test now.
 
 * NOTE: Some of apis have to be filled data in body correctly.
-In collection Pegb Staff:
+- In collection Pegb Staff:
     - update-product: "old_name" 
     - remove-product: "name", "description", "category"
     Send request "get-list-product" to get these data.
 
-In collection Pegb Customer:
+- In collection Pegb Customer:
     - remove-from-cart: "name"
     Send request "get-list-in-cart" to get these data.
 

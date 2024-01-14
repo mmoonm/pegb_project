@@ -40,5 +40,5 @@ class RemoveFromCart(BaseAPIView):
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         except RemoveFromCartFail:
             return JsonResponse({
-                'message': 'Add product fail'
+                'message': 'Remove product fail'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

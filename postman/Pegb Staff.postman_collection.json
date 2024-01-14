@@ -1,0 +1,351 @@
+{
+	"info": {
+		"_postman_id": "6a7f4687-0520-4468-8496-fdee6efea87c",
+		"name": "Pegb Staff",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32004320"
+	},
+	"item": [
+		{
+			"name": "sign-up",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const randomNumber = _.random(1000000000,9999999999)\r",
+							"pm.variables.set('randomNumber', randomNumber )"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"pegb-{{$randomInt}}@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"department\": \"pegb_group_A\",\r\n    \"phone\": \"{{randomNumber}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{staff-base-url}}/auth/sign-up/",
+					"host": [
+						"{{staff-base-url}}"
+					],
+					"path": [
+						"auth",
+						"sign-up",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"var staff_token = responseJson.access;\r",
+							"pm.environment.set(\"staff_token\", staff_token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"pegb-80@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{staff-base-url}}/auth/login/",
+					"host": [
+						"{{staff-base-url}}"
+					],
+					"path": [
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"price\": {{$randomInt}},\r\n    \"description\": \"{{$guid}}\",\r\n    \"category\": \"pegb_group_A\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{staff-base-url}}/activities/add-product/",
+					"host": [
+						"{{staff-base-url}}"
+					],
+					"path": [
+						"activities",
+						"add-product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-list-product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{staff-base-url}}/activities/get-list-product/",
+					"host": [
+						"{{staff-base-url}}"
+					],
+					"path": [
+						"activities",
+						"get-list-product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"old_name\": \"Berneice\",\r\n    \"name\": \"{{$randomFirstName}}\",\r\n    \"price\": {{$randomInt}},\r\n    \"description\": \"{{$guid}}\",\r\n    \"category\": \"pegb_group_A\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{staff-base-url}}/activities/update-product/",
+					"host": [
+						"{{staff-base-url}}"
+					],
+					"path": [
+						"activities",
+						"update-product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove-product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Kip\",\r\n    \"description\": \"360fe4b6-9d2c-4178-a690-973d60fa8cf3\",\r\n    \"category\": \"pegb_group_A\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{staff-base-url}}/activities/remove-product/",
+					"host": [
+						"{{staff-base-url}}"
+					],
+					"path": [
+						"activities",
+						"remove-product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-list-category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{staff-base-url}}/activities/get-list-category/",
+					"host": [
+						"{{staff-base-url}}"
+					],
+					"path": [
+						"activities",
+						"get-list-category",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_category_discount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"pegb_group_A\",\r\n    \"discount\": 15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{staff-base-url}}/activities/add-category-discount/",
+					"host": [
+						"{{staff-base-url}}"
+					],
+					"path": [
+						"activities",
+						"add-category-discount",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_customer_dicount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Gold\",\r\n    \"discount\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{staff-base-url}}/activities/add-customer-discount/",
+					"host": [
+						"{{staff-base-url}}"
+					],
+					"path": [
+						"activities",
+						"add-customer-discount",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "init-data",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{staff-base-url}}/init-data/init/",
+					"host": [
+						"{{staff-base-url}}"
+					],
+					"path": [
+						"init-data",
+						"init",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{staff_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.environment.get(\"staff_token\");",
+					"pm.collectionVariables.set(\"staff-token\", \"staff_token\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "staff-token",
+			"value": ""
+		}
+	]
+}

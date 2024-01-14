@@ -11,7 +11,6 @@ from common.models import CustomerLevel, Department
 
 
 class InitData(BaseAPIView):
-    permission_classes = [IsAuthenticated]
 
     def __init__(self):
         super().__init__()

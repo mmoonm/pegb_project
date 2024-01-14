@@ -1,0 +1,286 @@
+{
+	"info": {
+		"_postman_id": "487f189f-e171-4e17-878d-28bed1fba97e",
+		"name": "Pegb Customer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32004320"
+	},
+	"item": [
+		{
+			"name": "sign-up",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const randomNumber = _.random(1000000000,9999999999)\r",
+							"pm.variables.set('randomNumber', randomNumber )"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"customer-{{$randomInt}}@gmail.com\",\r\n    \"password\": \"123456789\",\r\n    \"name\": \"{{$randomFullName}}\",\r\n    \"phone\": \"{{randomNumber}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customer-base-url}}/auth/sign-up/",
+					"host": [
+						"{{customer-base-url}}"
+					],
+					"path": [
+						"auth",
+						"sign-up",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const responseJson = pm.response.json();\r",
+							"var customer_token = responseJson.access;\r",
+							"pm.environment.set(\"customer_token\", customer_token)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"customer-378@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customer-base-url}}/auth/login/",
+					"host": [
+						"{{customer-base-url}}"
+					],
+					"path": [
+						"auth",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-to-cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bonita\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customer-base-url}}/shop/add-to-cart/",
+					"host": [
+						"{{customer-base-url}}"
+					],
+					"path": [
+						"shop",
+						"add-to-cart",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-list-in-cart",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customer-base-url}}/shop/get-list-in-cart/",
+					"host": [
+						"{{customer-base-url}}"
+					],
+					"path": [
+						"shop",
+						"get-list-in-cart",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove-from-cart",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bonita\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customer-base-url}}/shop/remove-from-cart/",
+					"host": [
+						"{{customer-base-url}}"
+					],
+					"path": [
+						"shop",
+						"remove-from-cart",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customer-base-url}}/shop/create-order/",
+					"host": [
+						"{{customer-base-url}}"
+					],
+					"path": [
+						"shop",
+						"create-order",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-list-order",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{customer-base-url}}/shop/get-list-order/",
+					"host": [
+						"{{customer-base-url}}"
+					],
+					"path": [
+						"shop",
+						"get-list-order",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{customer_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.environment.get(\"customer_token\");",
+					"pm.collectionVariables.set(\"customer-token\", \"customer_token\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "customer-token",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,11 @@
+Django
+asgiref
+django-rest-framework
+djangorestframework
+pip
+setuptools
+sqlparse
+tzdata
+wheel
+mysqlclient
+djangorestframework-simplejwt

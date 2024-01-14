@@ -1,0 +1,49 @@
+version: '3.1'
+
+networks:
+  pegbnetwork:
+    external: true
+
+services:
+  nginx:
+    container_name: pegb-nginx
+    image: nginx
+    networks:
+      - pegbnetwork
+    ports:
+     - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+  
+  pegbdb:
+    container_name: pegbdb
+    image: mysql
+    command: mysqld --default-authentication-plugin=caching_sha2_password
+    networks:
+      - pegbnetwork
+    environment:
+      MYSQL_ROOT_PASSWORD: pegb
+    volumes:
+      - ./database/dbinit:/docker-entrypoint-initdb.d/
+    ports:
+      - 3306:3306
+  
+  pegbstaffapi:
+    container_name: pegbstaffapi
+    image: be-python-3-12:1.0.0
+    networks:
+      - pegbnetwork
+    volumes:
+      - ${SOURCEROOT}/docker/backend/image/pegbbackend/:/backend/
+    command: manage.py runserver 0.0.0.0:8000 --settings=pegbbackend.settings.staff.settings
+
+  pegbcustomerapi:
+    container_name: pegbcustomerapi
+    image: be-python-3-12:1.0.0
+    networks:
+      - pegbnetwork
+    volumes:
+      - ${SOURCEROOT}/docker/backend/image/pegbbackend/:/backend/
+    command: manage.py runserver 0.0.0.0:8000 --settings=pegbbackend.settings.customer.settings
+      
